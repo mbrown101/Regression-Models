@@ -12,29 +12,32 @@ This project studies miles per gallon (mpg) performance of manual and automatic 
 ###**Data**
 This project is based on data from the 1974 Motor Trend magazine.  It consists of  comprises fuel consumption data and 10 additional aspects of automobile design and performance for 32 automobiles (1973–74 models).  A data description can be found at https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html.
 
+###**Data Processing**
+The mtcars dataset is found in the R package 'datasets'.  We therefore call the library datasets and load the mtcars set with the data() command.
+
 ```{r echo = FALSE}
+
+#### Load package "datasets":
+library(datasets)
+
+####Load data "mtcars":
+data(mtcars)
 
 
 ```
 
-###**Data Processing**
 
 ###**Exploritory Data Analysis**
+```{r, echo=FALSE }
+summary(mtcars)
+plot(mtcars)
+```
 
 ###**Regression Analysis**
 
 
-```{r}
-summary(cars)
-```
 
-You can also embed plots, for example:
 
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 ###**Conclusion**
 
