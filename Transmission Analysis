@@ -1,5 +1,5 @@
 ---
-title: "**Regression Model for Analysis of Automatic v. Manual Automobile Transmissions**"
+title: '**Regression Model for Analysis of Automatic v. Manual Automobile Transmissions**'
 author: "Michael Brown"
 date: "May 2015"
 output: html_document
@@ -10,6 +10,12 @@ output: html_document
 This project studies miles per gallon (mpg) performance of manual and automatic automobile tranmissions using exploritory data analyis and linear regression models.  Based on these research techniques, the study concludes that...
 
 ###**Data**
+This project is based on data from the 1974 Motor Trend magazine.  It consists of  comprises fuel consumption data and 10 additional aspects of automobile design and performance for 32 automobiles (1973–74 models).  A data description can be found at https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html.
+
+```{r echo = FALSE}
+
+
+```
 
 ###**Data Processing**
 
