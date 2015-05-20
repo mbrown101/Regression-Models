@@ -7,10 +7,15 @@ output: html_document
 
 ###**Executive Summary**
 
-This project studies miles per gallon (mpg) performance of manual and automatic automobile tranmissions using exploritory data analyis and linear regression models.  Based on these research techniques, the study concludes that...
+This project studies miles per gallon (mpg) performance of manual and automatic automobile tranmissions using exploritory data analyis and linear regression models.  The objective of this investigation is to statistically address the following two questions:
+
+- Is an automatic or manual transmission better for MPG
+- Quantify the MPG difference between automatic and manual transmissions
+
+Based on these research techniques, the study concludes that manual transmissions are more fuel efficient than automatic transmissions by XX mpg
 
 ###**Data**
-This project is based on data from the 1974 Motor Trend magazine.  It consists of  comprises fuel consumption data and 10 additional aspects of automobile design and performance for 32 automobiles (1973–74 models).  A data description can be found at https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html.
+This project is based on data from the 1974 Motor Trend magazine.  It consists of  comprises fuel consumption data and 10 additional aspects of automobile design and performance for 32 automobiles (1973-74 models).  A data description can be found at https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html.
 
 ###**Data Processing**
 The mtcars dataset is found in the R package 'datasets'.  We therefore call the library datasets and load the mtcars set with the data() command.
@@ -19,6 +24,8 @@ The mtcars dataset is found in the R package 'datasets'.  We therefore call the 
 
 #### Load package "datasets":
 library(datasets)
+#install.packages("corrplot")
+library(corrplot) 
 
 ####Load data "mtcars":
 data(mtcars)
@@ -29,8 +36,17 @@ data(mtcars)
 
 ###**Exploritory Data Analysis**
 ```{r, echo=FALSE }
+str(mtcars)
 summary(mtcars)
 plot(mtcars)
+
+M <- cor(mtcars) # get correlations
+
+library('corrplot') #package corrplot
+corrplot(M, type = 'lower' , method = "circle") 
+corrplot(M, type = 'lower' , method = "number") 
+
+
 ```
 
 ###**Regression Analysis**
