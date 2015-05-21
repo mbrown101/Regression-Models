@@ -62,62 +62,7 @@ summary(fit1)
 
 ```
 
-First remove cylinders (cyl)
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
 
-fit2 <- lm(mpg ~  disp + hp + drat + wt + qsec + vs + am + gear + carb , data = mtcars)
-summary(fit2)
-
-```
-
-Now remove VS
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
-
-fit3 <- lm(mpg ~   disp + hp + drat + wt + qsec + am + gear + carb , data = mtcars)
-summary(fit3)
-
-```
-
-Carburetors is next (carb)
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
-
-fit4 <- lm(mpg ~  disp + hp + drat + wt + qsec + am + gear  , data = mtcars)
-summary(fit4)
-
-```
-
-Next number of forward gears (gear)
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
-
-fit5 <- lm(mpg ~  disp + hp +  drat + wt + qsec + am  , data = mtcars)
-summary(fit5)
-
-```
-
-
-Next rear axle ratio (drat)
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
-
-fit6 <- lm(mpg ~  disp + hp + wt + qsec + am  , data = mtcars)
-summary(fit6)
-
-```
-
-Next displacement (disp)
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
-
-fit7 <- lm(mpg ~   hp + wt + qsec + am  , data = mtcars)
-summary(fit7)
-
-```
-
-Next horsepower (hp)
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
-
-fit7 <- lm(mpg ~ + wt + qsec + am  , data = mtcars)
-summary(fit7)
-
-```
 
 Same thing using step
 ```{r, echo=FALSE , message=FALSE , warning=FALSE}
@@ -147,6 +92,7 @@ Based on the linear model derrived in the regression analysis section, we condlu
 1.  A manual transmission is better for mpg
 2.  A manual transmission will deliver 1.226 mpg more than an automatic transmission all other things being equal.  
 
+
 ###**Appendix **
 
 ####Plotting regression diagnostics  
@@ -154,5 +100,5 @@ Checking our model, we see that the Q-Q plot is approximately a straignt line cu
 
 ```{r, echo=FALSE , message=FALSE , warning=FALSE}
 par(mfrow=c(2,2))
-plot(fit7)
+plot(fit1)
 ```
