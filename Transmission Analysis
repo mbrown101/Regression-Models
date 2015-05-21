@@ -5,12 +5,15 @@ date: "May 2015"
 output: html_document
 ---
 
+```{r global_options, warning=FALSE , message = FALSE}
+```
+
 ###**Executive Summary**
 
 This project studies miles per gallon (mpg) performance of manual and automatic automobile tranmissions using exploritory data analyis and linear regression models.  The objective of this investigation is to statistically address the following two questions:
 
-- Is an automatic or manual transmission better for MPG
-- Quantify the MPG difference between automatic and manual transmissions
+1. Is an automatic or manual transmission better for MPG
+2. Quantify the MPG difference between automatic and manual transmissions
 
 Based on these research techniques, the study concludes that manual transmissions are more fuel efficient than automatic transmissions by XX mpg
 
@@ -45,16 +48,105 @@ M <- cor(mtcars) # get correlations
 library('corrplot') #package corrplot
 corrplot(M, type = 'lower' , method = "circle") 
 corrplot(M, type = 'lower' , method = "number") 
-
+cor(mtcars)
 
 ```
 
+Initial impression of the correlation plot suggets the highly correlated variables to miles per gallon (mpg) include weight, displacement and number of cylinders all having a high negative correlation.  These are not independent effects however, as it is likely a close relationship between displacement and number of cylindsers for instance.  Relative to the question of manual v. automatic transmissions, some factors have a lower correlation such as quarter-mile time.  While we can take some initial guesses, for completness, we will first conduct regression anaylsis for all explanitory factors, then remove the factor with the least explanitory power until the remaining terms have a high degree of explanitory power and the residuals are both small in magnutide and in the aggregate.  We wil accomplpish this by removing all explanitory factors sequentially where p > 0.05 (testing at the 95% confidence interval)   
+
 ###**Regression Analysis**
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+fit1 <- lm(mpg ~ cyl + disp + hp + drat + wt + qsec + vs + am + gear + carb , data = mtcars)
+summary(fit1)
+
+```
+
+First remove cylinders (cyl)
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+fit2 <- lm(mpg ~  disp + hp + drat + wt + qsec + vs + am + gear + carb , data = mtcars)
+summary(fit2)
+
+```
+
+Now remove VS
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+fit3 <- lm(mpg ~   disp + hp + drat + wt + qsec + am + gear + carb , data = mtcars)
+summary(fit3)
+
+```
+
+Carburetors is next (carb)
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+fit4 <- lm(mpg ~  disp + hp + drat + wt + qsec + am + gear  , data = mtcars)
+summary(fit4)
+
+```
+
+Next number of forward gears (gear)
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+fit5 <- lm(mpg ~  disp + hp +  drat + wt + qsec + am  , data = mtcars)
+summary(fit5)
+
+```
 
 
+Next rear axle ratio (drat)
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
 
+fit6 <- lm(mpg ~  disp + hp + wt + qsec + am  , data = mtcars)
+summary(fit6)
 
+```
+
+Next displacement (disp)
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+fit7 <- lm(mpg ~   hp + wt + qsec + am  , data = mtcars)
+summary(fit7)
+
+```
+
+Next horsepower (hp)
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+fit7 <- lm(mpg ~ + wt + qsec + am  , data = mtcars)
+summary(fit7)
+
+```
+
+Same thing using step
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+
+step(fit1 , direction = "backward")
+
+```
+
+plotting regression diagnostics
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+par(mfrow=c(2,2))
+plot(fit1)
+```
+
+Based on the regression analysis, we find the minimum adequate model to express mpg as a funtion of the remaining explanitory variantsin teh mtcars data set to be:
+
+mpg = 9.618 + 2.936 * am + 1.226 * qsec - 3.917 wt
+
+where:
+  mpg is Miles / US gallon
+  am is {1 if manual transmission and 0 if automatice transmission}
+  qsec is quarter-mile time [seconds]
+  wt is weight in [lb / 1000]
 
 ###**Conclusion**
+
+Based on the linear model derrived in the regression analysis section, we condlide that:
+
+1.  A manual transmission is better for mpg
+2.  A manual transmission will deliver 1.226 mpg more than an automztic transmission all other things being equal.  
 
 ###**Appendix **
