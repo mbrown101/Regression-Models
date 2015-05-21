@@ -126,27 +126,33 @@ step(fit1 , direction = "backward")
 
 ```
 
-plotting regression diagnostics
-```{r, echo=FALSE , message=FALSE , warning=FALSE}
-par(mfrow=c(2,2))
-plot(fit1)
-```
 
-Based on the regression analysis, we find the minimum adequate model to express mpg as a funtion of the remaining explanitory variantsin teh mtcars data set to be:
+
+Based on the regression analysis, we find the minimum adequate model to express mpg as a funtion of the remaining explanitory variants in the mtcars data set to be:
 
 mpg = 9.618 + 2.936 * am + 1.226 * qsec - 3.917 wt
 
-where:
-  mpg is Miles / US gallon
-  am is {1 if manual transmission and 0 if automatice transmission}
-  qsec is quarter-mile time [seconds]
-  wt is weight in [lb / 1000]
+where:  
+  - mpg is Miles / US gallon   
+  - am is {1 if manual transmission and 0 if automatice transmission}   
+  - qsec is quarter-mile time [seconds]  
+  - wt is weight in [lb / 1000]  
+  
+It is noted that the variance [R^2^] for the linear model with all explanitory variables in the mtcars dataset was R^2^ = .869 thus explaining 86.9% of the variance in mpg.  The minimal viable model was constructed with R^2^ = .8579 explaining 85.79% of the variance.  We thus cinclude we have not removed a key explanitory variable in the provess of model simplification.    
 
 ###**Conclusion**
 
-Based on the linear model derrived in the regression analysis section, we condlide that:
+Based on the linear model derrived in the regression analysis section, we condlude that:
 
 1.  A manual transmission is better for mpg
-2.  A manual transmission will deliver 1.226 mpg more than an automztic transmission all other things being equal.  
+2.  A manual transmission will deliver 1.226 mpg more than an automatic transmission all other things being equal.  
 
 ###**Appendix **
+
+####Plotting regression diagnostics  
+Checking our model, we see that the Q-Q plot is approximately a straignt line cutting evenly across the residual quantiles and the standard distribution suggesting the residuals are approximately normally distributed.  We further note that the residuals v. fitted plot show a somewhat even distribution over estimating and under estimating.  The fitted line for this plot does seem to show some pattern (high residuals on the ends and low rediduals in the middle) thus highlighting an area for potential additional investigation. 
+
+```{r, echo=FALSE , message=FALSE , warning=FALSE}
+par(mfrow=c(2,2))
+plot(fit7)
+```
