@@ -15,13 +15,10 @@ This project studies miles per gallon (mpg) performance of manual and automatic 
 1. Is an automatic or manual transmission better for MPG
 2. Quantify the MPG difference between automatic and manual transmissions
 
-Based on these research techniques, the study concludes that manual transmissions are more fuel efficient than automatic transmissions by XX mpg
+Based on linear regression using mtcars data, the study concludes that for data provided, manual transmissions are more fuel efficient than automatic transmissions by an average of 2.936 mpg.
 
 ###**Data**
 This project is based on data from the 1974 Motor Trend magazine.  It consists of  comprises fuel consumption data and 10 additional aspects of automobile design and performance for 32 automobiles (1973-74 models).  A data description can be found at https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html.
-
-###**Data Processing**
-The mtcars dataset is found in the R package 'datasets'.  We therefore call the library datasets and load the mtcars set with the data() command.
 
 ```{r echo = FALSE}
 
@@ -39,32 +36,40 @@ data(mtcars)
 
 ###**Exploritory Data Analysis**
 ```{r, echo=FALSE }
-str(mtcars)
-summary(mtcars)
-plot(mtcars)
+#str(mtcars)
+#summary(mtcars)
+#plot(mtcars)
+
+par(mfrow=c(1,2))
+
+boxplot(mtcars$mpg ~ mtcars$am , data = mtcars ,  
+  col=(c("gold","blue")),
+  main="MPG v. Transmission", xlab="Transmission [0 = automatic , 1 = manual]" , ylab = 'Miles per gallon')
 
 M <- cor(mtcars) # get correlations
 
 library('corrplot') #package corrplot
+#corrplot(M, type = 'lower' , method = "number") 
 corrplot(M, type = 'lower' , method = "circle") 
-corrplot(M, type = 'lower' , method = "number") 
-cor(mtcars)
+cor(mtcars)[1,]
+
 
 ```
 
 Initial impression of the correlation plot suggets the highly correlated variables to miles per gallon (mpg) include weight, displacement and number of cylinders all having a high negative correlation.  These are not independent effects however, as it is likely a close relationship between displacement and number of cylindsers for instance.  Relative to the question of manual v. automatic transmissions, some factors have a lower correlation such as quarter-mile time.  While we can take some initial guesses, for completness, we will first conduct regression anaylsis for all explanitory factors, then remove the factor with the least explanitory power until the remaining terms have a high degree of explanitory power and the residuals are both small in magnutide and in the aggregate.  We wil accomplpish this by removing all explanitory factors sequentially where p > 0.05 (testing at the 95% confidence interval)   
 
 ###**Regression Analysis**
+
 ```{r, echo=FALSE , message=FALSE , warning=FALSE}
 
 fit1 <- lm(mpg ~ cyl + disp + hp + drat + wt + qsec + vs + am + gear + carb , data = mtcars)
-summary(fit1)
+#summary(fit1)
 
 ```
 
 
 
-Same thing using step
+Using the step function, we allow the sequential removal of the least significant variable as follows:  
 ```{r, echo=FALSE , message=FALSE , warning=FALSE}
 
 step(fit1 , direction = "backward")
@@ -90,7 +95,7 @@ It is noted that the variance [R^2^] for the linear model with all explanitory v
 Based on the linear model derrived in the regression analysis section, we condlude that:
 
 1.  A manual transmission is better for mpg
-2.  A manual transmission will deliver 1.226 mpg more than an automatic transmission all other things being equal.  
+2.  A manual transmission will deliver 2.936 mpg more than an automatic transmission all other things being equal.  
 
 
 ###**Appendix **
