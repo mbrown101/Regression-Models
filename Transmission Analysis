@@ -89,7 +89,7 @@ summary(simple_fit)
 
 ```
 
-#####**Multiple Linear Regression with all Variables  |  mpg ~ .**
+#####**Multivariate Linear Regression with all Variables  |  mpg ~ .**
 Constructing a regression model with all explanitory factors results in an adjusted-R^2^ = 0.8066 and a residual standard error of 2.65, a considerable improvement on the single variable model.  While the model explains mpg considerablly better than the single variable mode, there are several terms that are present but do not contribute substantially to the model and that likely lower the adjusted-R^2^.  The terms suject to rejection have a high Pr(>|t|) relative to the confidence interval which we whall take as 95%.  A plot of residuals and a Q-Q plot can be found in the appendix.
 ```{r, echo=FALSE , message=FALSE , warning=FALSE}
 
@@ -99,7 +99,7 @@ summary(fit1)
 ```
 
 
-#####**Minimum Viable Multiple Linear Regression Model  |  mpg ~ wt + qsec + am**
+#####**Minimum Viable Multivariate Linear Regression Model  |  mpg ~ wt + qsec + am**
 Seeking a model with fewer variables, we use the step function which provides for the sequential removal of the least significant variable until a minimal model is achieved.  The output from the successive reductions are shown in the appendix.  The minimal viable model is attractive relative to the other two models in that it has fewer variables while explaining mpg to a greater degree based on an adjusted-R^2^ = 0.8336 and a reduced residual standard error = 2.459.  A plot of residuals and a Q-Q plot can be found in the appendix.
 
 ```{r, echo=FALSE , message=FALSE , warning=FALSE , results='hide' }
