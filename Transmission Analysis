@@ -64,7 +64,21 @@ corrplot.mixed( M , main="Correlation of Explanitory Variables" , mar=c(0,0,4,0)
 #####**Analysis of Correlations**
 The correlation plot indicates miles per gallon (mpg) is negatively correlated with several variables to include weight, displacement, horsepower and number of cylinders (all with values in excess of -0.75).  These are not independent effects however.  For example, there is a close positive correlation between number of cylinders, dispalcement and horsepower (greater that 0.75).  We would therefore expect that many of the variables will be removed from the linear model due to a high correlation with one another.  As variables are removed, we also expect to see certain of the remaining  variables become stronger contributors to the model.
 
- 
+#####**Statistical Inference - Test Hypothesis that Manual and Automatic Transmissions Yield the Same mpg**
+Before commencing regression analyis, it is useful to determine if transmission type has an effect on fuel efficiency as measured by mpg.  We shall use a t-test to make this determination and evaluate at a 95% confidence interval.
+
+Ho = there is no difference in mpg based on transmission type
+Ha = there is a difference in mpg based on transmission type
+
+Since the p-value = 0.06132 is greater than 0.05 (CI = 0.95), the t-test below indicates we should reject the null hypothesis and accept the alternate hypothesis that mpg is indeed effected by transmission type. 
+
+```{r, echo=FALSE }
+mpg_manual <- subset(mtcars , am == 1)
+mpg_auto <- subset(mtcars , am == 0)
+t.test(mpg_manual , mpg_auto )
+
+```
+
 ###**Regression Analysis**
 #####**Single Variable Linear Regression  |  mpg ~ am**
 We first examine a single explanitory variable transmission type (am) to see if there is a simple model that will address the question of effect of transmission on fuel efficiency.  The results of the single variable fit below show that the coefficient for am is 7.244939 indicating a manual transmission will yield better fuel economy by 7.244939 mpg than an automatic transmission all other things being equal.  Unfortunately, with an adjusted- R^2^ = 0.3385, the model leaves a good deal of mpg unexplained with equally dissatisfying residual values characterized by a standard error of 4.902.  A plot of residuals and a Q-Q plot can be found in the appendix.
